@@ -69,7 +69,7 @@
 
 % ----- Images -----
 \RequirePackage{graphicx}
-\RequirePackage{subfigure}
+\RequirePackage{subcaption}
 
 % ----- Algorithms -----
 \RequirePackage{algorithm}
