@@ -11,26 +11,13 @@
 
 %----------------------------------------------------------------------------------------------------%
 %
-% -> Options
-%
-%----------------------------------------------------------------------------------------------------%
-\RequirePackage{ifthen}
-
-\gdef\hitrep@readingreport{读书报告}
-\gdef\hitrep@experimentalreport{实验报告}
-\gdef\hitrep@reporttype{\hitrep@experimentalreport}
-
-\DeclareOption{exp}{\gdef\hitrep@reporttype{\hitrep@experimentalreport}}
-\DeclareOption{reading}{\gdef\hitrep@reporttype{\hitrep@readingreport}}
-
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexart}}
-\ProcessOptions\relax
-
-%----------------------------------------------------------------------------------------------------%
-%
 % -> Package
 %
 %----------------------------------------------------------------------------------------------------%
+% ----- Control -----
+\RequirePackage{ifthen}
+\RequirePackage{ifplatform}
+
 % ----- Layout -----
 \RequirePackage[a4paper,hmargin=3.17cm,vmargin=2.54cm]{geometry}
 
@@ -52,9 +39,16 @@
 % ----- Math -----
 \RequirePackage{amsmath}
 \RequirePackage{amsthm}
+\RequirePackage{amsfonts}
+\RequirePackage{bm}
 
 % ----- Links -----
-\RequirePackage[hidelinks, breaklinks = true]{hyperref}
+\RequirePackage[
+    hidelinks,
+    breaklinks = true,
+    bookmarksopen = true,
+    bookmarksopenlevel = 2
+]{hyperref}
 
 % ----- References -----
 \RequirePackage[nameinlink]{cleveref}
@@ -66,6 +60,7 @@
 % ----- Table -----
 \RequirePackage{booktabs}
 \RequirePackage{makecell}
+\RequirePackage{multirow}
 
 % ----- Images -----
 \RequirePackage{graphicx}
@@ -75,6 +70,21 @@
 \RequirePackage{algorithm}
 \RequirePackage{algorithmicx}
 \RequirePackage[noend]{algpseudocode}
+
+%----------------------------------------------------------------------------------------------------%
+%
+% -> Options
+%
+%----------------------------------------------------------------------------------------------------%
+\gdef\hitrep@readingreport{读书报告}
+\gdef\hitrep@experimentalreport{实验报告}
+\gdef\hitrep@reporttype{\hitrep@experimentalreport}
+
+\DeclareOption{exp}{\gdef\hitrep@reporttype{\hitrep@experimentalreport}}
+\DeclareOption{reading}{\gdef\hitrep@reporttype{\hitrep@readingreport}}
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{ctexart}}
+\ProcessOptions\relax
 
 %----------------------------------------------------------------------------------------------------%
 %
@@ -122,7 +132,12 @@
 %----------------------------------------------------------------------------------------------------%
 \setmainfont{Times New Roman}
 
-\setCJKmainfont[AutoFakeBold, AutoFakeSlant]{SimSun}
+\ifwindows
+    \setCJKmainfont[AutoFakeBold, AutoFakeSlant]{SimSun}
+\fi
+\ifmacosx
+    \setCJKmainfont[AutoFakeBold, AutoFakeSlant]{Songti SC}
+\fi
 
 %----------------------------------------------------------------------------------------------------%
 %
@@ -180,21 +195,6 @@
 
 %----------------------------------------------------------------------------------------------------%
 %
-% -> References
-%
-%----------------------------------------------------------------------------------------------------%
-\AtBeginDocument{
-    \crefformat{table}{#2表 #1#3 }
-    \crefformat{figure}{#2图 #1#3 }
-    \crefformat{equation}{#2公式 (#1)#3 }
-    \crefformat{algorithm}{#2算法 #1#3 }
-    \crefformat{subsection}{ #2#1 小节#3}
-
-    \crefrangeformat{equation}{公式(#3#1#4) $\sim$ (#5#2#6)}
-}
-
-%----------------------------------------------------------------------------------------------------%
-%
 % -> Algorithms
 %
 %----------------------------------------------------------------------------------------------------%
@@ -222,6 +222,17 @@
     labelsep        =   quad,
     font            =   { song, sfive },
     justification   =   centering
+}
+
+\AtBeginDocument{
+    \crefformat{table}{#2表 #1#3 }
+    \crefformat{figure}{#2图 #1#3 }
+    \crefformat{subfigure}{#2图 #1#3 }
+    \crefformat{equation}{#2公式 (#1)#3 }
+    \crefformat{algorithm}{#2算法 #1#3 }
+    \crefformat{subsection}{ #2#1 小节#3}
+
+    \crefrangeformat{equation}{公式(#3#1#4) $\sim$ (#5#2#6)}
 }
 
 %----------------------------------------------------------------------------------------------------%
