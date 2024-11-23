@@ -127,6 +127,17 @@
 
 %----------------------------------------------------------------------------------------------------%
 %
+% -> Table of Content
+%
+%----------------------------------------------------------------------------------------------------%
+\newcommand{\toc}{
+    \phantomsection
+    \addcontentsline{toc}{section}{\contentsname}
+    \tableofcontents
+}
+
+%----------------------------------------------------------------------------------------------------%
+%
 % -> Fonts
 %
 %----------------------------------------------------------------------------------------------------%
@@ -272,10 +283,10 @@
 %
 %----------------------------------------------------------------------------------------------------%
 \newcounter{hitrep@counter@numpar}
-\def\@hitrep@oldcmd@item{\item}
+\def\hitrep@oldcmd@item{\item}
 \newenvironment{numpar}{%
     \def\item{\par\refstepcounter{hitrep@counter@numpar}(\thehitrep@counter@numpar) }%
 }{%
     \setcounter{hitrep@counter@numpar}{0}%
-    \def\item\@hitrep@oldcmd@item%
+    \def\item\hitrep@oldcmd@item%
 }
