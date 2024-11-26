@@ -277,7 +277,7 @@
 
 \bibliographystyle{gbt7714-numerical}
 
-\newcommand{\bib}{1}{
+\newcommand{\bib}[1]{
     \phantomsection
     \addcontentsline{toc}{section}{\refname}
     \bibliography{#1}
