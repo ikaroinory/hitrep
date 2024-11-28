@@ -20,6 +20,7 @@
 
 % ----- Layout -----
 \RequirePackage[a4paper,hmargin=3.17cm,vmargin=2.54cm]{geometry}
+\usepackage{setspace}
 
 % ----- Fix font size -----
 \RequirePackage{anyfontsize}
@@ -118,15 +119,6 @@
 
 %----------------------------------------------------------------------------------------------------%
 %
-% -> Layout
-%
-%----------------------------------------------------------------------------------------------------%
-\renewcommand*{\baselinestretch}{1.5}
-\setlength{\baselineskip}{16pt}
-\setlength{\parskip}{12pt}
-
-%----------------------------------------------------------------------------------------------------%
-%
 % -> Table of Content
 %
 %----------------------------------------------------------------------------------------------------%
@@ -183,6 +175,7 @@
 
 \renewcommand{\maketitle}{
     \begin{center}
+        \setlength{\parskip}{12pt}
         {\zihao{-2}\heiti \uline{\ \ \hit@year\ \ }年\uline{\ \ \hit@semester\ \ }季学期研究生课程考核}
 
         {\zihao{-3}\heiti \hitrep@reporttype}
@@ -200,8 +193,12 @@
             \hitrep@optiontitle{考核结果}           &                       & \hitrep@optiontitle[2.15cm]{阅卷人} &
         \end{tabular}
     }
+
     \zihao{-4}
     \newpage
+    \setlength{\baselineskip}{16pt}
+    \setlength{\parskip}{12pt}
+    \onehalfspacing
 }
 
 %----------------------------------------------------------------------------------------------------%
